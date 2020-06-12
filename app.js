@@ -48,6 +48,8 @@ passport.deserializeUser((obj, next) => {
   next(null, obj);
 });
 
+app.use(express.static(__dirname + '/public'));
+
 require('./routes/index')(app, passport, database, path);
 
 app.listen(3000, function() {});

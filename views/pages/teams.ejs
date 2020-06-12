@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+  <head>
+      <%- include('../partials/head') %>
+  </head>
+  <body class="d-flex flex-column min-vh-100 mx-0 px-0">
+
+    <navbar>
+      <%- include('../partials/navbar') %>
+    </navbar>
+
+    <main class="container">
+      <section class="teams-table" id="table">
+        <table class="table">
+          <thead class="thead-dark"></thead>
+            <th scope="col">Position</th>
+            <th scope="col">Name</th>
+            <th scope="col">Abbreviation</th>
+            <th scope="col">Value</th>
+          </thead>
+          <tbody>
+            <% for(var i = 0; i < teams.length; i++) { %>
+              <tr>
+                <th scope="row"><%= i+1 %></th>
+                <td><%= teams[i].name %></td>
+                <td><%= teams[i].abbreviation %></td>
+                <td><%= teams[i].value %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+    <footer class="mt-auto">
+      <%- include('../partials/footer') %>
+    </footer>
+
+  </body>
+</html>
