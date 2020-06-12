@@ -1,41 +1,24 @@
-module.exports = (app, passport, database, path) => {
+module.exports = (app, database, oidc, path) => {
 
   app.get('/', (req, res) => {
-    if (req.isAuthenticated()) {
-      return res.redirect('/dashboard')
+    if (req.userContext) {
+      res.render('pages/root.ejs', {  });
     } else {
-      return res.redirect('/login')
-    };
-  });
-
-  app.get('/login', passport.authenticate('oidc'));
-
-  app.get('/authorization-code/callback',
-    passport.authenticate('oidc', { failureRedirect: '/error' }),
-    (req, res) => {
-      res.redirect('/dashboard');
+      res.redirect('/login');
     }
-  );
-
-  app.get('/dashboard', ensureLoggedIn, (req, res) => {
-    // database('teams').then((teams) => {
-    //   res.send(teams);
-    // });
-    // res.sendFile(path.join(appPath, 'dashboard/dashboard.html'));
-    res.render('pages/dashboard.ejs', { title: 'Dashboard' });
   });
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect('/');
+  app.get('/profile', oidc.ensureAuthenticated(), (req, res) => {
+    var userInfo = req.userContext
+    console.log(userInfo)
+    res.render('pages/profile.ejs', { userInfo: userInfo });
   });
 
-  function ensureLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-
-    res.redirect('/login')
-  }
+  app.get('/teams', oidc.ensureAuthenticated(), (req, res) => {
+    let teams = database('teams').select();
+    Promise.resolve(teams)
+      .then(teams => {
+        res.render('pages/teams.ejs', { teams: teams });
+      })
+  })
 };
