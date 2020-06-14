@@ -24,6 +24,7 @@ app.use(session({
 }));
 app.use(oidc.router);
 app.use(express.static(path.join(__dirname,'public')));
+app.use('/favicon.ico', express.static('public/images/favicon.ico'));
 
 require('./routes/index')(app, database, oidc, path);
 
