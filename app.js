@@ -29,7 +29,8 @@ app.use(express.static('public'));
 require('./routes/index')(app, database, oidc, path);
 
 oidc.on('ready', () => {
-  app.listen(3000, () => console.log('Started!'));
+  var port = process.env.PORT || 3000
+  app.listen(port, () => console.log('Started!'));
 });
 
 oidc.on('error', err => {
