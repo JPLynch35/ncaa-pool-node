@@ -19,7 +19,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: 'postgres://localhost/ncaa_pool',
+    connection: process.env.DATABASE_URL,
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',
