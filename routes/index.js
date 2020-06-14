@@ -10,7 +10,6 @@ module.exports = (app, database, oidc, path) => {
 
   app.get('/profile', oidc.ensureAuthenticated(), (req, res) => {
     var userInfo = req.userContext
-    console.log(userInfo)
     res.render('pages/profile.ejs', { userInfo: userInfo });
   });
 
