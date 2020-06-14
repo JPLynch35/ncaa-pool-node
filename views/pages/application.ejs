@@ -9,7 +9,11 @@
       <aside id="fh5co-aside" role="complementary" class="border js-fullheight">
         <%- include('../partials/navbar') %>
       </aside>
-      <%- include(`../pages/${page}`) %>
+      <div id="fh5co-main">
+        <div class="fh5co-narrow-content">
+          <%- include(`../pages/${page}`) %>
+        </div>
+      </div>
     </div>
 
     <%- include('../partials/js-footer') %>
