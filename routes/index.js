@@ -2,7 +2,7 @@ module.exports = (app, database, oidc, path) => {
 
   app.get('/', (req, res) => {
     if (req.userContext) {
-      res.render('pages/root.ejs', {  });
+      res.render('pages/application.ejs', { page: 'root' });
     } else {
       res.redirect('/login');
     }
@@ -10,14 +10,14 @@ module.exports = (app, database, oidc, path) => {
 
   app.get('/profile', oidc.ensureAuthenticated(), (req, res) => {
     var userInfo = req.userContext
-    res.render('pages/profile.ejs', { userInfo: userInfo });
+    res.render('pages/application.ejs', { page: 'profile', userInfo: userInfo });
   });
 
   app.get('/teams', oidc.ensureAuthenticated(), (req, res) => {
     let teams = database('teams').select();
     Promise.resolve(teams)
       .then(teams => {
-        res.render('pages/teams.ejs', { teams: teams });
+        res.render('pages/application.ejs', { page: 'teams', teams: teams });
       })
   })
 };
