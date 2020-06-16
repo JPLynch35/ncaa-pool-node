@@ -1,23 +1,22 @@
-module.exports = (app, database, oidc, path) => {
+module.exports = (app, knex, oidc) => {
+  app.get('/local-logout', oidc.ensureAuthenticated(), (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
 
-  app.get('/', (req, res) => {
-    if (req.userContext) {
-      res.render('pages/application.ejs', { page: 'root' });
-    } else {
-      res.redirect('/login');
-    }
+  app.get('/', oidc.ensureAuthenticated(), (req, res) => {
+    res.render('pages/application.ejs', { page: 'home', user: req.session.user });
   });
 
   app.get('/profile', oidc.ensureAuthenticated(), (req, res) => {
-    var userInfo = req.userContext
-    res.render('pages/application.ejs', { page: 'profile', userInfo: userInfo });
+    res.render('pages/application.ejs', { page: 'profile', user: req.session.user });
   });
 
   app.get('/teams', oidc.ensureAuthenticated(), (req, res) => {
-    let teams = database('teams').select();
+    let teams = knex('teams').select();
     Promise.resolve(teams)
       .then(teams => {
-        res.render('pages/application.ejs', { page: 'teams', teams: teams });
-      })
-  })
+        res.render('pages/application.ejs', { page: 'teams', teams: teams, user: req.session.user });
+      });
+  });
 };

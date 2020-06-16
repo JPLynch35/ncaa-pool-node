@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/ncaa_pool',
+    connection: 'postgres://localhost/ncaa-pool-node',
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',
@@ -10,7 +10,7 @@ module.exports = {
   },
   testing: {
     client: 'pg',
-    connection: 'postgres://localhost/ncaa_pool',
+    connection: 'postgres://localhost/ncaa-pool-node',
     useNullAsDefault: true,
     migrations: {
       directory: './data/migrations',

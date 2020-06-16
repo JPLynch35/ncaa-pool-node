@@ -2,12 +2,13 @@ require('dotenv').config();
 
 const express = require('express');
 const session = require('express-session');
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
-const database = require('knex')(configuration);
-const path = require('path');
+// const path = require('path');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
 const app = express();
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('./knexfile')[environment];
+const knex = require('knex')(configuration);
+const UsersService = require('./modules/usersService.js');
 const oidc = new ExpressOIDC({
   issuer: `https://${process.env.OKTA_DOMAIN}/oauth2/default`,
   client_id: process.env.CLIENT_ID,
@@ -23,10 +24,25 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(oidc.router);
+// stores user object in session
+app.use((req, res, next) => {
+  if (req.userContext && req.userContext.userinfo) {
+    const userEmail = req.userContext.userinfo.preferred_username;
+    UsersService.findByEmail(knex, userEmail)
+      .then(user => {
+        req.session.user = user;
+        return next();
+      }).catch(err => {
+        return next(err);
+      });
+  } else {
+    return next();
+  };
+});
 app.use(express.static('public'));
-// app.use('/favicon.ico', express.static('public/images/favicon.ico'));
 
-require('./routes/index')(app, database, oidc, path);
+require('./routes/index')(app, knex, oidc);
+require('./routes/admin_index')(app, oidc);
 
 oidc.on('ready', () => {
   var port = process.env.PORT || 3000

@@ -1,12 +1,17 @@
-<h1 id="fh5co-logo"><a href="index.html">NCAA Pool Party</a></h1>
+<h1 id="fh5co-logo"><a href="index.html">NCAAPP</a></h1>
 <nav id="fh5co-main-menu" role="navigation">
   <ul>
     <li><a href="/">Home</a></li>
+    <% if (user.is_admin) { %>
+      <li><a href="/season_settings">Admin - Season Settings</a></li>
+    <% } %>
     <li><a href="/profile">Profile</a></li>
     <li><a href="/teams">Teams</a></li>
-    <li>
+    <!-- TODO change logout to a single form and button, but fix CSS to match other li > a links -->
+    <li><a href="/logout" id="logout">Logout</a></li>
+    <li class="hidden">
       <form method="post" action="/logout">
-        <button class="nav-link btn btn-link" type="submit">Logout</button>
+        <button id="logout-button" type="submit">Logout</button>
       </form>
     </li>
   </ul>
