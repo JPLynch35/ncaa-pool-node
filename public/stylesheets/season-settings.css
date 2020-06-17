@@ -6,6 +6,20 @@
   margin-left: 1vw;
 }
 
+.season-settings .spending-cap i {
+  font-size: 18px;
+  border: none;
+  border-radius: 0;
+  font-weight: inherit;
+}
+
 .season-settings input[type="date"].form-control {
   line-height: normal;
 }
+
+/* mobile breakpoint */
+@media (max-width: 768px) {
+  .season-settings button {
+    margin: 10px 0px 0px 0px;
+  }
+};

@@ -3,13 +3,16 @@
     <h2 class="fh5co-heading">Admin - Season Settings</h2>
   </div>
 
-  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+  <div class="col-md-9 col-sm-9 col-padding animate-box spending-cap" data-animate-effect="fadeInLeft">
     <div class="blog-entry">
       <div class="desc">
         <h3>Spending Cap</h3>
         <form class="form-inline">
           <div class="form-group">
-            <input type="text" class="form-control" id="spending_cap" value=<%= season.spending_cap %>>
+            <div class="input-group">
+              <i class="input-group-addon">$</i>
+              <input type="text" class="form-control" id="spending_cap" value=<%= season.spending_cap %>>
+              </div>
             <button type="button" class="btn btn-primary btn-sm">Save</button>
           </div>
         </form>
@@ -18,7 +21,7 @@
     </div>
   </div>
 
-  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+  <div class="col-md-9 col-sm-9 col-padding animate-box start-date" data-animate-effect="fadeInLeft">
     <div class="blog-entry">
       <div class="desc">
         <h3>Start Date</h3>
@@ -33,7 +36,7 @@
     </div>
   </div>
 
-  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+  <div class="col-md-9 col-sm-9 col-padding animate-box end-date" data-animate-effect="fadeInLeft">
     <div class="blog-entry">
       <div class="desc">
         <h3>End Date</h3>
