@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 
 require('./routes/index')(app, knex, oidc);
-require('./routes/admin_index')(app, oidc);
+require('./routes/admin_index')(app, knex, oidc);
 
 oidc.on('ready', () => {
   var port = process.env.PORT || 3000

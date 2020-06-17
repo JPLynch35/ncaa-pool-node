@@ -1,5 +1,52 @@
-<div class="row row-bottom-padded-md">
+<div class="row row-bottom-padded-md season-settings">
   <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
     <h2 class="fh5co-heading">Admin - Season Settings</h2>
   </div>
+
+  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+    <div class="blog-entry">
+      <div class="desc">
+        <h3>Max Dollars</h3>
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" id="max_dollars" value=<%= season.max_dollars %>>
+            <button type="button" class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+    <div class="blog-entry">
+      <div class="desc">
+        <h3>Start Date</h3>
+        <form class="form-inline">
+          <div class="form-group">
+            <% const start_date = season['start_date'].toISOString().substring(0, 10) %>
+            <input type="date" class="form-control" id="start_date" value=<%= start_date %>>
+            <button type="button" class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 col-sm-9 col-padding animate-box" data-animate-effect="fadeInLeft">
+    <div class="blog-entry">
+      <div class="desc">
+        <h3>End Date</h3>
+        <form class="form-inline">
+          <div class="form-group">
+            <% const end_date = season['end_date'].toISOString().substring(0, 10) %>
+            <input type="date" class="form-control" id="end" value=<%= end_date %>>
+            <button type="button" class="btn btn-primary btn-sm">Save</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
 </div>

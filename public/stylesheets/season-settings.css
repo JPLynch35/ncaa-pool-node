@@ -1,0 +1,11 @@
+.season-settings input {
+  border-radius: 0;
+}
+
+.season-settings button {
+  margin-left: 1vw;
+}
+
+.season-settings input[type="date"].form-control {
+  line-height: normal;
+}
