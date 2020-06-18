@@ -27,14 +27,11 @@ app.use(oidc.router);
 // stores user object in session
 app.use((req, res, next) => {
   if (req.userContext && req.userContext.userinfo) {
-    const userEmail = req.userContext.userinfo.preferred_username;
-    UsersService.findByEmail(knex, userEmail)
-      .then(user => {
-        req.session.user = user;
-        return next();
-      }).catch(err => {
-        return next(err);
-      });
+    const userInfo = req.userContext.userinfo;
+    UsersService.findOrCreateUser(knex, userInfo).then(user => {
+      req.session.user = user;
+      return next();
+    });
   } else {
     return next();
   };
