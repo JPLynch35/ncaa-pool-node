@@ -7,6 +7,13 @@ const UsersService = {
       .where("email", downcasedEmail)
       .first();
   },
+  findById(knex, id) {
+    return knex
+      .from("users")
+      .select("*")
+      .where("id", id)
+      .first();
+  },
   // deleteUser(knex, id) {
   //   const downcasedEmail = userEmail.toLowerCase();
   //   return knex("users")
