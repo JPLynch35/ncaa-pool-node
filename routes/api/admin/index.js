@@ -1,0 +1,19 @@
+module.exports = (app, knex, oidc, SeasonsService) => {
+  app.get('/api/admin/current_season', oidc.ensureAuthenticated(), (req, res) => {
+    const user = req.session.user;
+    unauthorizedUnlessAdmin(res, user);
+    const year = req.query.seasonYear;
+    SeasonsService.findByYear(knex, year)
+      .then(currentSeason => {
+        res.status(200).send(currentSeason);
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+        res.status(500).send(err);
+    });
+  });
+
+  unauthorizedUnlessAdmin = (res, user) => {
+    if (!user.is_admin) res.status(401).json({status: 'Unauthorized'});
+  };
+};

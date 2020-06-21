@@ -1,0 +1,41 @@
+.seasons .year h3 {
+  font-size: 16;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.seasons .year .form-group {
+  margin-bottom: 0;
+}
+
+.seasons #year {
+  background-color: #fff;
+}
+
+.seasons input {
+  border-radius: 0;
+}
+
+.seasons button {
+  margin-left: 1vw;
+}
+
+.seasons .spending-cap i {
+  font-size: 18px;
+  border: none;
+  border-radius: 0;
+  font-weight: inherit;
+}
+
+.seasons input[type="date"].form-control {
+  line-height: normal;
+}
+
+.seasons button {
+  margin-left: 0px;
+}
+
+/* mobile breakpoint */
+/* @media (max-width: 768px) {
+
+}; */

@@ -1,0 +1,69 @@
+<div class="row row-bottom-padded-md seasons">
+  <div class="col-md-62 animate-box" data-animate-effect="fadeInLeft">
+    <h2 class="fh5co-heading">Admin - Seasons</h2>
+  </div>
+
+  <form action="/admin/seasons" method="post">
+    <div class="col-md-12 col-sm-12 col-padding animate-box year" data-animate-effect="fadeInLeft">
+      <div class="quarter-width">
+        <h3>Current Season</h3>
+        <div class="form-group">
+          <select class="form-control" id="year" name="year">
+            <% for(var i = 0; i < seasonYears.length; i++) { %>
+              <% if (season.year == seasonYears[i]) { %>
+                <option selected=true value=<%= seasonYears[i] %>><%= seasonYears[i] %></option>
+              <% } else { %>
+                <option value=<%= seasonYears[i] %>><%= seasonYears[i] %></option>
+              <% }; %>
+            <% }; %>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-padding animate-box spending-cap" data-animate-effect="fadeInLeft">
+      <div class="half-width">
+        <div class="blog-entry">
+          <div class="desc col-md-6">
+            <h3>Spending Cap</h3>
+            <div class="form-group">
+              <div class="input-group">
+                <i class="input-group-addon">$</i>
+                <input type="text" class="form-control" id="spending-cap" name="spendingCap" value=<%= season.spending_cap %>>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-padding animate-box start-date" data-animate-effect="fadeInLeft">
+      <div class="blog-entry">
+        <div class="desc col-md-6">
+          <h3>Start Date</h3>
+          <div class="form-group">
+            <% const humanized_start_date = season.start_date.toISOString().substring(0, 10) %>
+            <input type="date" class="form-control" id="start-date" name="startDate" value=<%= humanized_start_date %>>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-padding animate-box end-date" data-animate-effect="fadeInLeft">
+      <div class="blog-entry">
+        <div class="desc col-md-6">
+          <h3>End Date</h3>
+          <div class="form-group">
+            <% const humanized_end_date = season.end_date.toISOString().substring(0, 10) %>
+            <input type="date" class="form-control" id="end-date" name="endDate" value=<%= humanized_end_date %>>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-padding animate-box end-date" data-animate-effect="fadeInLeft">
+      <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    </div>
+  </form>
+
+</div>

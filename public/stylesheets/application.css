@@ -53,3 +53,12 @@
   transform: scaleX(1);
 }
 /* end style logout form to look like other links */
+
+.quarter-width {
+  width: 25%;
+}
+
+.half-width {
+  width: 50%;
+  padding-right: 10px;
+}
