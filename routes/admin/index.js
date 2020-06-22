@@ -1,7 +1,6 @@
 module.exports = (app, knex, oidc, SeasonsService) => {
   app.get('/admin/seasons', oidc.ensureAuthenticated(), (req, res) => {
     const user = req.session.user;
-    redirectUnlessAdmin(res, user);
     Promise.all([
       SeasonsService.findCurrentYear(knex),
       SeasonsService.listAllYears(knex)
@@ -18,7 +17,6 @@ module.exports = (app, knex, oidc, SeasonsService) => {
 
   app.post('/admin/seasons', oidc.ensureAuthenticated(), (req, res) => {
     const user = req.session.user;
-    redirectUnlessAdmin(res, user);
     currentYear = req.body.year;
     spendingCap = req.body.spendingCap;
     startDate = req.body.startDate;
@@ -32,8 +30,4 @@ module.exports = (app, knex, oidc, SeasonsService) => {
         res.status(500).send(err);
       });
   });
-
-  redirectUnlessAdmin = (res, user) => {
-    if (!user.is_admin) res.redirect('/home');
-  };
 };

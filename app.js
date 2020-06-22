@@ -32,21 +32,18 @@ app.use(session({
 app.use(oidc.router);
 app.use(express.static('public'));
 
-// requireAdmin = (req, res, next) => {
-//   console.log("read from session");
-//   const user = req.session.user;
-//   // if (user.is_admin) {
-//   if (req.session) {
-//     next();
-//   } else {
-//     res.status(401).json({status: 'Unauthorized'});
-//   };
-// };
-
-// // Automatically apply the `requireLogin` middleware to all routes starting with `/admin`
-// app.all("/admin/*", requireAdmin, function(req, res, next) {
-//   next();
-// });
+// Automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
+requireAdmin = (req, res, next) => {
+  const user = req.session.user;
+  if (!user.is_admin) {
+    res.redirect('/home');
+  } else {
+    next();
+  };
+};
+app.all("/admin/*", requireAdmin, function(req, res, next) {
+  next();
+});
 
 const storeUser = function (req, res, next) {
   if (req && req.userContext && req.userContext.userinfo) {
@@ -58,9 +55,10 @@ const storeUser = function (req, res, next) {
       })
       .catch(err => {
         console.warn('Something went wrong:', err);
+        next();
       });
   } else {
-    next();
+    res.redirect('/')
   };
 };
 

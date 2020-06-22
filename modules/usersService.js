@@ -39,7 +39,7 @@ function findByEmail(knex, downcasedEmail) {
 function insertUser(knex, downcasedEmail, firstName, lastName) {
   return knex('users')
     .insert({email: downcasedEmail, first_name: firstName, last_name: lastName})
-    .returning();
+    .returning('*');
 };
 
 module.exports = UsersService;
