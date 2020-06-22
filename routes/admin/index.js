@@ -34,6 +34,6 @@ module.exports = (app, knex, oidc, SeasonsService) => {
   });
 
   redirectUnlessAdmin = (res, user) => {
-    if (!user.is_admin) res.redirect('/');
+    if (!user.is_admin) res.redirect('/home');
   };
 };

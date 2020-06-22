@@ -1,10 +1,10 @@
-module.exports = (app, knex, oidc, TeamsService) => {
+module.exports = (app, knex, oidc, storeUser, TeamsService) => {
   app.get('/local-logout', (req, res) => {
     req.logout();
     res.redirect('/login');
   });
 
-  app.get('/', oidc.ensureAuthenticated(), (req, res) => {
+  app.get('/', oidc.ensureAuthenticated(), storeUser, (req, res) => {
     res.redirect('/home');
   });
 

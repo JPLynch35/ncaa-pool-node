@@ -30,23 +30,6 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(oidc.router);
-// stores user object in session
-app.use((req, res, next) => {
-  if (req.userContext && req.userContext.userinfo) {
-    const userInfo = req.userContext.userinfo;
-    UsersService.findOrCreateUser(knex, userInfo)
-      .then(user => {
-        console.log(`store in session: ${user}`);
-        req.session.user = user;
-        next();
-      })
-      .catch(err => {
-        console.warn('Something went wrong:', err);
-      });
-  } else {
-    next();
-  };
-});
 app.use(express.static('public'));
 
 // requireAdmin = (req, res, next) => {
@@ -65,7 +48,23 @@ app.use(express.static('public'));
 //   next();
 // });
 
-require('./routes/index')(app, knex, oidc, TeamsService);
+const storeUser = function (req, res, next) {
+  if (req && req.userContext && req.userContext.userinfo) {
+    const userInfo = req.userContext.userinfo;
+    UsersService.findOrCreateUser(knex, userInfo)
+      .then(user => {
+        req.session.user = user;
+        next();
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+      });
+  } else {
+    next();
+  };
+};
+
+require('./routes/index')(app, knex, oidc, storeUser, TeamsService);
 require('./routes/admin/index')(app, knex, oidc, SeasonsService);
 require('./routes/api/admin/index')(app, knex, oidc, SeasonsService);
 
