@@ -21,22 +21,6 @@
       </div>
     </div>
 
-    <div class="col-md-12 col-sm-12 col-padding animate-box spending-cap" data-animate-effect="fadeInLeft">
-      <div class="half-width">
-        <div class="blog-entry">
-          <div class="desc col-md-6">
-            <h3>Spending Cap</h3>
-            <div class="form-group">
-              <div class="input-group">
-                <i class="input-group-addon">$</i>
-                <input type="text" class="form-control" id="spending-cap" name="spendingCap" value=<%= season.spending_cap %>>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="col-md-6 col-sm-6 col-padding animate-box start-date" data-animate-effect="fadeInLeft">
       <div class="blog-entry">
         <div class="desc col-md-6">
@@ -56,6 +40,22 @@
           <div class="form-group">
             <% const humanized_end_date = season.end_date.toISOString().substring(0, 10) %>
             <input type="date" class="form-control" id="end-date" name="endDate" value=<%= humanized_end_date %>>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-padding animate-box spending-cap" data-animate-effect="fadeInLeft">
+      <div class="half-width">
+        <div class="blog-entry">
+          <div class="desc col-md-6">
+            <h3>Spending Cap</h3>
+            <div class="form-group">
+              <div class="input-group">
+                <i class="input-group-addon">$</i>
+                <input type="text" class="form-control" id="spending-cap" name="spendingCap" value=<%= season.spending_cap %>>
+              </div>
+            </div>
           </div>
         </div>
       </div>
