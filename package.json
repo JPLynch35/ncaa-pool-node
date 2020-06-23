@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "node-sass -w sass -o public/stylesheets/adminator/ public/stylesheets",
     "start": "node app.js"
   },
   "keywords": [],

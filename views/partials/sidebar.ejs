@@ -1,0 +1,92 @@
+<div class="sidebar">
+  <div class="sidebar-inner">
+    <!-- ### $Sidebar Header ### -->
+    <div class="sidebar-logo">
+      <div class="peers ai-c fxw-nw">
+        <div class="peer peer-greed">
+          <a class="sidebar-link td-n" href="">
+            <div class="peers ai-c fxw-nw">
+              <div class="peer">
+                <div class="logo text-center">
+                  <img src="/images/football-player.png" alt="" id="football-player-icon">
+                </div>
+              </div>
+              <div class="peer peer-greed">
+                <h5 class="lh-1 mB-0 logo-text">NCAAPP</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="peer">
+          <div class="mobile-toggle sidebar-toggle">
+            <a href="" class="td-n">
+              <i class="ti-arrow-circle-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ### $Sidebar Menu ### -->
+    <ul class="sidebar-menu scrollable pos-r">
+      <li class="nav-item mT-30 actived">
+        <a class="sidebar-link" href="/home">
+          <span class="icon-holder">
+            <i class="ti-home"></i>
+          </span>
+          <span class="title">Home</span>
+        </a>
+      </li>
+      <% if (user.is_admin) { %>
+        <li class="nav-item">
+          <a class='sidebar-link' href="/admin/seasons">
+            <span class="icon-holder">
+              <i class="ti-settings"></i>
+            </span>
+            <span class="title">Admin - Seasons</span>
+          </a>
+        </li>
+      <% }; %>
+      <li class="nav-item">
+        <a class='sidebar-link' href="/entries">
+          <span class="icon-holder">
+            <i class="ti-receipt"></i>
+          </span>
+          <span class="title">My Entries</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class='sidebar-link' href="/results">
+          <span class="icon-holder">
+            <i class="ti-bar-chart"></i>
+          </span>
+          <span class="title">Results</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class='sidebar-link' href="/rules">
+          <span class="icon-holder">
+            <i class="ti-align-left"></i>
+          </span>
+          <span class="title">Rules</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class='sidebar-link' href="/selections">
+          <span class="icon-holder">
+            <i class="ti-pencil-alt"></i>
+          </span>
+          <span class="title">Selections</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class='sidebar-link' href="/teams">
+          <span class="icon-holder">
+            <i class="ti-layout-list-thumb"></i>
+          </span>
+          <span class="title">Teams</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  $('.teams-table table').DataTable({
-    'paging': false,
-    'searching': false,
+  $('#dataTable').dataTable({
+    "dom": '<"pull-left"f><"pull-right"l>tip',
+    'paging': false
   });
 });

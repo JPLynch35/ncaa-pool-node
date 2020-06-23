@@ -1,24 +1,31 @@
-<div class="row row-bottom-padded-md">
-  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-    <h2 class="fh5co-heading">Teams</h2>
-      <section class="teams-table" id="table">
-        <table class="table">
-          <thead class="thead-dark"></thead>
-            <th scope="col">Name</th>
-            <th scope="col">Abbreviation</th>
-            <th scope="col">Value</th>
-          </thead>
-          <tbody>
-            <% for(var i = 0; i < teams.length; i++) { %>
-              <tr>
-                <td><%= teams[i].name %></td>
-                <td><%= teams[i].abbreviation %></td>
-                <td><%= teams[i].value %></td>
-              </tr>
-            <% }; %>
-          </tbody>
-        </table>
-      </section>
-    </h2>
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <h4 class="c-grey-900 mB-20">Teams</h4>
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Abbreviatoin</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for(var i = 0; i < teams.length; i++) { %>
+                    <tr>
+                      <td><%= teams[i].name %></td>
+                      <td><%= teams[i].abbreviation %></td>
+                      <td><%= teams[i].value %></td>
+                    </tr>
+                  <% }; %>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</main>

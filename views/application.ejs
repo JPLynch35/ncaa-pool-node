@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+  <head>
+    <%- include('partials/head') %>
+  </head>
+  <body class="app">
+    <div id='loader'>
+      <div class="spinner"></div>
+    </div>
+    <div>
+      <%- include('partials/sidebar') %>
+      <div class="page-container">
+        <%- include('partials/topbar') %>
+        <%- include(`pages/${page}`) %>
+        <%- include('partials/footer') %>
+      </div>
+    <%- include('partials/footer-js') %>
+  </body>
+</html>

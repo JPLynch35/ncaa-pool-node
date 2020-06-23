@@ -30,7 +30,7 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(oidc.router);
-app.use(express.static('public'));
+app.use(express.static('public/'));
 
 // Automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
 requireAdmin = (req, res, next) => {
