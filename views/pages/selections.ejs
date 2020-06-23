@@ -1,21 +1,50 @@
-<div class="row row-bottom-padded-md selection">
+<div class="row row-bottom-padded-md selections">
   <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
     <h2 class="fh5co-heading">Selections</h2>
-      <section class="teams-table">
-        <table class="table">
+  </div>
+
+  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+    <h2 class="fh5co-heading">Available Teams</h2>
+      <section class="teams-table available">
+        <table data-ss="1" class="table">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Abbreviation</th>
-              <th scope="col">Value</th>
+              <th scope="col" class="name">Name</th>
+              <th scope="col" class="abbreviation">Abbreviation</th>
+              <th scope="col" class="value">Value</th>
             </tr>
           </thead>
           <tbody>
             <% for(var i = 0; i < teams.length; i++) { %>
-              <tr>
+              <tr class="team-row">
                 <td><%= teams[i].name %></td>
                 <td><%= teams[i].abbreviation %></td>
                 <td><%= teams[i].value %></td>
+              </tr>
+            <% }; %>
+          </tbody>
+        </table>
+      </section>
+    </h2>
+  </div>
+
+  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+    <h2 class="fh5co-heading">Selected Teams</h2>
+      <section class="teams-table selected">
+        <table data-ss="1" class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" class="name">Name</th>
+              <th scope="col" class="abbreviation">Abbreviation</th>
+              <th scope="col" class="value">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i = 0; i < 5; i++) { %>
+              <tr class="team-row">
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             <% }; %>
           </tbody>
