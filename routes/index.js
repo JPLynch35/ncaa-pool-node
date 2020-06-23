@@ -12,7 +12,7 @@ module.exports = (app, knex, oidc, storeUser, TeamsService) => {
     res.render('pages/application.ejs', { page: 'home', user: req.session.user });
   });
 
-  app.get('/user/entries', oidc.ensureAuthenticated(), (req, res) => {
+  app.get('/entries', oidc.ensureAuthenticated(), (req, res) => {
     res.render('pages/application.ejs', { page: 'entries', user: req.session.user });
   });
 
@@ -20,7 +20,7 @@ module.exports = (app, knex, oidc, storeUser, TeamsService) => {
     res.render('pages/application.ejs', { page: 'results', user: req.session.user });
   });
 
-  app.get('/user/selections', oidc.ensureAuthenticated(), (req, res) => {
+  app.get('/selections', oidc.ensureAuthenticated(), (req, res) => {
     TeamsService.listAll(knex)
       .then(allTeams => {
         res.render('pages/application.ejs', { page: 'selections', teams: allTeams, user: req.session.user });
@@ -38,7 +38,7 @@ module.exports = (app, knex, oidc, storeUser, TeamsService) => {
   app.get('/teams', oidc.ensureAuthenticated(), (req, res) => {
     TeamsService.listAll(knex)
       .then(allTeams => {
-        res.render('pages/application.ejs', { page: 'selections', teams: allTeams, user: req.session.user });
+        res.render('pages/application.ejs', { page: 'teams', teams: allTeams, user: req.session.user });
         })
         .catch(err => {
           console.warn('Something went wrong:', err);

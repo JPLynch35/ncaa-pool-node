@@ -1,31 +1,32 @@
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
 <title>NCAA Pool Party</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
 
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-<link rel="shortcut icon" href="/images/favicon.ico">
-<link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+<link rel="shortcut icon" href="/images/favicon.ico"></link>
+<link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192"></link>
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png"></link>
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700"></link>
 
 <!-- Animate.css -->
-<link rel="stylesheet" href="/stylesheets/vendor/animate.css">
+<link rel="stylesheet" href="/stylesheets/vendor/animate.css"></link>
 <!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="/stylesheets/vendor/icomoon.css">
+<link rel="stylesheet" href="/stylesheets/vendor/icomoon.css"></link>
 <!-- Bootstrap  -->
-<link rel="stylesheet" href="/stylesheets/vendor/bootstrap.css">
+<link rel="stylesheet" href="/stylesheets/vendor/bootstrap.css"></link>
 <!-- Flexslider  -->
-<link rel="stylesheet" href="/stylesheets/vendor/flexslider.css">
+<link rel="stylesheet" href="/stylesheets/vendor/flexslider.css"></link>
 <!-- Theme style  -->
-<link rel="stylesheet" href="/stylesheets/vendor/marble.css">
+<link rel="stylesheet" href="/stylesheets/vendor/marble.css"></link>
 <!-- Datatables style  -->
-<link rel="stylesheet" href="/stylesheets/vendor/datatables.min.css">
+<link rel="stylesheet" href="/stylesheets/vendor/datatables.min.css"></link>
 <!-- App Specific css -->
-<link rel="stylesheet" href="/stylesheets/application.css">
-<link rel="stylesheet" href="/stylesheets/selections.css">
-<link rel="stylesheet" href="/stylesheets/admin/seasons.css">
+<link rel="stylesheet" href="/stylesheets/application.css"></link>
+<% if (page) { %>
+  <link rel="stylesheet" href="/stylesheets/<%= page %>.css"></link>
+<% } %>
 
 <!-- Modernizr JS -->
 <script src="/javascripts/vendor/modernizr-2.6.2.min.js"></script>
