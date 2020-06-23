@@ -1,31 +1,20 @@
 const UsersService = {
-  // updateUser(knex, id, userFields) {
-  //   return knex("users")
-  //     .where({ id })
-  //     .update(userFields);
-  // },
-
   async findOrCreateUser(knex, userInfo) {
     const downcasedEmail = userInfo.preferred_username.toLowerCase();
     const firstName = userInfo.given_name;
     const lastName = userInfo.family_name;
-    return await findByEmail(knex, downcasedEmail)
-      .then(async user => {
-        if (user) {
-          return user;
-        } else {
-          return await insertUser(knex, downcasedEmail, firstName, lastName)
-            .then(user => {
-              return user;
-            })
-            .catch(err => {
-              console.warn('Something went wrong:', err);
-            });
-        };
-      })
-      .catch(err => {
-        console.warn('Something went wrong:', err);
-      });
+    var user = await findByEmail(knex, downcasedEmail);
+    if (!user) {
+      await insertUser(knex, downcasedEmail, firstName, lastName);
+      user = await findByEmail(knex, downcasedEmail);
+    };
+    return user;
+  },
+
+  async listEntries(knex, user) {
+    const teamIds = await listUserTeamIds(knex, user);
+    const userTeams = await listUserTeams (knex, teamIds);
+    return userTeams;
   },
 };
 
@@ -33,13 +22,48 @@ function findByEmail(knex, downcasedEmail) {
   return knex('users')
     .select('*')
     .where('email', downcasedEmail)
-    .first();
+    .first()
+    .then(user => {
+      return user
+    })
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
 };
 
 function insertUser(knex, downcasedEmail, firstName, lastName) {
   return knex('users')
     .insert({email: downcasedEmail, first_name: firstName, last_name: lastName})
-    .returning('*');
+    .then()
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
 };
+
+function listUserTeamIds(knex, user) {
+  return knex('user_teams')
+    .select('team_id')
+    .where('user_id', user.id)
+    .then(teamIds => {
+      return teamIds
+    })
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
+};
+
+function listUserTeams(knex, teamIds) {
+  return knex('teams')
+    .select('*')
+    .whereIn('id', teamIds)
+    .then(teams => {
+      return teams
+    })
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
+
+};
+
 
 module.exports = UsersService;

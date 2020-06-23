@@ -1,12 +1,22 @@
 <div class="row row-bottom-padded-md selections">
-  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
+  <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
     <h2 class="fh5co-heading">Selections</h2>
+    <div class="remaining-selection">
+      <p>Selections Remaining:</p>
+      <p id="selections-remaining-count">
+        <% if (entries.length) { %>
+          <%= entries.length %>
+        <% } else { %>
+          5
+        <% } %>
+      </p>
+    </div>
   </div>
 
   <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
     <h2 class="fh5co-heading">Available Teams</h2>
       <section class="teams-table available">
-        <table data-ss="1" class="table">
+        <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col" class="name">Name</th>
@@ -31,7 +41,7 @@
   <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
     <h2 class="fh5co-heading">Selected Teams</h2>
       <section class="teams-table selected">
-        <table data-ss="1" class="table">
+        <table class="table">
           <thead class="thead-dark">
             <tr>
               <th scope="col" class="name">Name</th>
@@ -40,13 +50,7 @@
             </tr>
           </thead>
           <tbody>
-            <% for(var i = 0; i < 5; i++) { %>
-              <tr class="team-row">
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            <% }; %>
+              <tr class="team-row"></tr>
           </tbody>
         </table>
       </section>

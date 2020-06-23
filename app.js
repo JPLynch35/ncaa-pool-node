@@ -58,11 +58,11 @@ const storeUser = function (req, res, next) {
         next();
       });
   } else {
-    res.redirect('/')
+    res.redirect('/login')
   };
 };
 
-require('./routes/index')(app, knex, oidc, storeUser, TeamsService);
+require('./routes/index')(app, knex, oidc, storeUser, TeamsService, UsersService);
 require('./routes/admin/index')(app, knex, oidc, SeasonsService);
 require('./routes/api/admin/index')(app, knex, oidc, SeasonsService);
 

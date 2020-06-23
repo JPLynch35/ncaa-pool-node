@@ -1,4 +1,4 @@
-module.exports = (app, knex, oidc, storeUser, TeamsService) => {
+module.exports = (app, knex, oidc, storeUser, TeamsService, UsersService) => {
   app.get('/local-logout', (req, res) => {
     req.logout();
     res.redirect('/login');
@@ -21,14 +21,18 @@ module.exports = (app, knex, oidc, storeUser, TeamsService) => {
   });
 
   app.get('/selections', oidc.ensureAuthenticated(), (req, res) => {
-    TeamsService.listAll(knex)
-      .then(allTeams => {
-        res.render('pages/application.ejs', { page: 'selections', teams: allTeams, user: req.session.user });
-        })
-        .catch(err => {
-          console.warn('Something went wrong:', err);
-          res.status(500).send(err);
-        });
+    const user = req.session.user;
+    Promise.all([
+      TeamsService.listAll(knex),
+      UsersService.listEntries(knex, user)
+    ])
+      .then(([allTeams, entries]) => {
+        res.render('pages/application.ejs', {page: 'selections', user: user, teams: allTeams, entries: entries});
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+        res.status(500).send(err);
+      });
   });
 
   app.get('/rules', oidc.ensureAuthenticated(), (req, res) => {

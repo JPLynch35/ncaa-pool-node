@@ -3,49 +3,65 @@ const SeasonsService = {
     return knex('seasons')
       .select('*')
       .where('current', true)
-      .first();
+      .first()
+      .then(currentYear => {
+        return currentYear
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+      });
   },
 
   findByYear(knex, year) {
     return knex('seasons')
       .select('*')
       .where('year', year)
-      .first();
+      .first()
+      .then(season => {
+        return season
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+      });
   },
 
   listAllYears(knex) {
     return knex('seasons')
-      .pluck('year');
+      .pluck('year')
+      .then(allYears => {
+        return allYears
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+      });
   },
 
   async updateSeason(knex, currentYear, spendingCap, startDate, endDate) {
-    return await unsetCurrentSeason(knex)
-      .then(async () => {
-        return await updateSelectedSeason(knex, currentYear, spendingCap, startDate, endDate)
-          .then((season) => {
-            return season;
-          })
-          .catch(err => {
-            console.warn('Something went wrong:', err);
-          });
-    })
-    .catch(err => {
-      console.warn('Something went wrong:', err);
-    });
+    await unsetCurrentSeason(knex);
+    await updateSelectedSeason(knex, currentYear, spendingCap, startDate, endDate);
+    const season = SeasonsService.findByYear(knex, currentYear);
+    return season;
   },
 };
 
 function unsetCurrentSeason(knex) {
   return knex('seasons')
     .where('current', true)
-    .update({current: false});
+    .update({current: false})
+    .then()
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
 };
 
 function updateSelectedSeason(knex, currentYear, spendingCap, startDate, endDate) {
   return knex('seasons')
     .where('year', currentYear)
     .update({current: true, spending_cap: spendingCap, start_date: startDate, end_date: endDate})
-    .returning();
+    .then()
+    .catch(err => {
+      console.warn('Something went wrong:', err);
+    });
 };
 
 module.exports = SeasonsService;

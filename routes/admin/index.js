@@ -5,7 +5,7 @@ module.exports = (app, knex, oidc, SeasonsService) => {
       SeasonsService.findCurrentYear(knex),
       SeasonsService.listAllYears(knex)
     ])
-      .then(([season,seasonYears]) => {
+      .then(([season, seasonYears]) => {
         res.render('pages/application.ejs', { page: 'admin/seasons', user: user, season: season, seasonYears: seasonYears});
         }
       )
