@@ -27,6 +27,7 @@ const SeasonsService = {
 
   listAllYears(knex) {
     return knex('seasons')
+      .orderBy('year')
       .pluck('year')
       .then(allYears => {
         return allYears

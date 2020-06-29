@@ -1,12 +1,12 @@
 module.exports = (app, knex, oidc, SeasonsService) => {
-  app.get('/admin/seasons', oidc.ensureAuthenticated(), (req, res) => {
+  app.get('/admin/season_settings', oidc.ensureAuthenticated(), (req, res) => {
     const user = req.session.user;
     Promise.all([
       SeasonsService.findCurrentYear(knex),
       SeasonsService.listAllYears(knex)
     ])
       .then(([season, seasonYears]) => {
-        res.render('application.ejs', { page: 'admin/seasons', user: user, season: season, seasonYears: seasonYears});
+        res.render('application.ejs', { page: 'admin/season_settings', user: user, season: season, seasonYears: seasonYears});
         }
       )
       .catch(err => {
@@ -15,14 +15,13 @@ module.exports = (app, knex, oidc, SeasonsService) => {
       });
   });
 
-  app.post('/admin/seasons', oidc.ensureAuthenticated(), (req, res) => {
-    const user = req.session.user;
+  app.post('/admin/season_settings', oidc.ensureAuthenticated(), (req, res) => {
     currentYear = req.body.year;
     spendingCap = req.body.spendingCap;
     startDate = req.body.startDate;
     endDate = req.body.endDate;
     SeasonsService.updateSeason(knex, currentYear, spendingCap, startDate, endDate)
-      .then((season) => {
+      .then(() => {
         res.redirect('back');
       })
       .catch(err => {

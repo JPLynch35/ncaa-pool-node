@@ -7288,6 +7288,8 @@ hr {
       background-position: center left;
       background-repeat: no-repeat;
       display: inline-block;
+      /* TODO check logo container height */
+      /* min-height: 65px; */
       min-height: calc(65px - 1px);
       width: 100%;
       width: 70px; }
@@ -7297,6 +7299,8 @@ hr {
     display: none;
     float: right;
     font-size: 18px;
+    /* TODO check logo container height */
+    /* line-height: 65px; } */
     line-height: calc(65px - 1px); }
     .sidebar-logo .mobile-toggle a {
       color: #72777a; }

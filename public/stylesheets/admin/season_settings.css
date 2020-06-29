@@ -1,0 +1,11 @@
+.money-field i {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+/* mobile breakpoint */
+/* @media (max-width: 768px) {
+
+}; */
