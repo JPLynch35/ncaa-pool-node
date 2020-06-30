@@ -5,7 +5,7 @@ $(document).ready(function() {
   //   loader.classList.add('fadeOut');
   // }, 300);
 
-  $('#logout-shell').click((e) => {
-    $('$logout').click();
+  $('#logout').click((e) => {
+    $('#hidden-logout').click();
   });
 });

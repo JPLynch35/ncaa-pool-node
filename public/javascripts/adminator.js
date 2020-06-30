@@ -22,6 +22,10 @@ $(document).ready(function() {
     });
   };
 
+  // popover
+  $('[data-toggle="popover"]').popover();
+  $('[data-toggle="tooltip"]').tooltip();
+
   // perfect-scrollbar
   const scrollables = $('.scrollable');
   if (scrollables.length > 0) {

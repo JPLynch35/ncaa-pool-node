@@ -10,27 +10,30 @@
     <ul class="nav-right">
       <li class="dropdown">
         <a href="" class="dropdown-toggle no-after peers fxw-nw ai-c lh-1" data-toggle="dropdown">
-          <div class="peer mR-10">
+          <!-- <div class="peer mR-10">
             <img class="w-2r bdrs-50p" src="" alt="">
-          </div>
+          </div> -->
           <div class="peer">
             <span class="fsz-sm c-grey-900"><%= user.first_name %> <%= user.last_name %></span>
           </div>
         </a>
         <ul class="dropdown-menu fsz-sm">
-          <li>
+          <!-- <li>
             <a href="/user/profile" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
               <i class="ti-user mR-10"></i>
               <span>Profile</span>
             </a>
           </li>
-          <li role="separator" class="divider"></li>
+          <li role="separator" class="divider"></li> -->
           <li id="logout">
             <a href="javascript:void(0);" class="d-b td-n pY-5 bgcH-grey-100 c-grey-700">
               <i class="ti-power-off mR-10"></i>
               <span>Logout</span>
             </a>
           </li>
+          <form method="post" action="/logout" class="d-none">
+            <button id="hidden-logout" type="submit"></button>
+          </form>
         </ul>
       </li>
     </ul>
