@@ -32,19 +32,6 @@ app.use(session({
 app.use(oidc.router);
 app.use(express.static('public/'));
 
-// automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
-requireAdmin = (req, res, next) => {
-  const user = req.session.user;
-  if (!user.is_admin) {
-    res.redirect('/home');
-  } else {
-    next();
-  };
-};
-app.all("/admin/*", requireAdmin, function(req, res, next) {
-  next();
-});
-
 // automatically apply the `storeUser` middleware to all routes
 storeUser = function (req, res, next) {
   if (req && req.userContext && req.userContext.userinfo && !req.session.user) {
@@ -63,6 +50,20 @@ storeUser = function (req, res, next) {
   };
 };
 app.all("/*", storeUser, function(req, res, next) {
+  next();
+});
+
+// automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
+requireAdmin = (req, res, next) => {
+  const user = req.session.user;
+  if (!user.is_admin) {
+    res.redirect('/home');
+  } else {
+    next();
+  };
+};
+// TODO storeUser does not store user for requireAdmin check
+app.all("/admin/*", storeUser, requireAdmin, function(req, res, next) {
   next();
 });
 

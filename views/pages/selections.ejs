@@ -5,7 +5,7 @@
 
       <div class="masonry-item col-md-6">
         <div class="bgc-white p-20 bd">
-          <div class="d-flex justify-content-between">
+          <div id="calculated-stats" class="d-flex justify-content-between">
             <div>
               <div class="d-flex">
                 <h4 class="c-grey-900">Remaining Selections:</h4>
@@ -19,9 +19,7 @@
               </div>
               <div class="d-flex">
                 <h4 class="c-grey-900">Remaining Budget:</h4>
-                <h4 id="remaining-budget" class="c-grey-900">
-                  $<%= season.spending_cap %>
-                </h4>
+                <h4 id="remaining-budget" class="c-grey-900">$<%= season.spending_cap %></h4>
               </div>
             </div>
             <div>
@@ -39,8 +37,13 @@
                     <th>Value</th>
                   </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
+                <tfoot>
+                  <tr>
+                    <th colspan="2" style="text-align:right">Total:</th>
+                    <th id="total-spent"></th>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
@@ -62,9 +65,9 @@
               <tbody>
                 <% for(var i = 0; i < teams.length; i++) { %>
                   <tr>
-                    <td><%= teams[i].name %></td>
-                    <td><%= teams[i].abbreviation %></td>
-                    <td><%= teams[i].value %></td>
+                    <td class="name"><%= teams[i].name %></td>
+                    <td class="abbreviation"><%= teams[i].abbreviation %></td>
+                    <td class="value"><%= teams[i].value %></td>
                   </tr>
                 <% }; %>
               </tbody>

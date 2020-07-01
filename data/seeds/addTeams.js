@@ -14,7 +14,7 @@ let createTeam = (knex, id, team) => {
       espn_id: parseInt(team[0]),
       name: team[1],
       abbreviation: team[2],
-      value: 0
+      value: Math.floor(Math.random() * (3000000 - 1000000) ) + 1000000
     })
     .catch(err => {
       console.log(`Error seeding team data: ${err}`)
