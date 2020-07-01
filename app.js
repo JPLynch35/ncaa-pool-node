@@ -32,7 +32,7 @@ app.use(session({
 app.use(oidc.router);
 app.use(express.static('public/'));
 
-// Automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
+// automatically apply the `requireAdmin` middleware to all routes starting with `/admin`
 requireAdmin = (req, res, next) => {
   const user = req.session.user;
   if (!user.is_admin) {
@@ -45,8 +45,9 @@ app.all("/admin/*", requireAdmin, function(req, res, next) {
   next();
 });
 
-const storeUser = function (req, res, next) {
-  if (req && req.userContext && req.userContext.userinfo) {
+// automatically apply the `storeUser` middleware to all routes
+storeUser = function (req, res, next) {
+  if (req && req.userContext && req.userContext.userinfo && !req.session.user) {
     const userInfo = req.userContext.userinfo;
     UsersService.findOrCreateUser(knex, userInfo)
       .then(user => {
@@ -58,11 +59,14 @@ const storeUser = function (req, res, next) {
         next();
       });
   } else {
-    res.redirect('/login')
+    next();
   };
 };
+app.all("/*", storeUser, function(req, res, next) {
+  next();
+});
 
-require('./routes/index')(app, knex, oidc, storeUser, TeamsService, UsersService);
+require('./routes/index')(app, knex, oidc, SeasonsService, TeamsService, UsersService);
 require('./routes/admin/index')(app, knex, oidc, SeasonsService);
 require('./routes/api/admin/index')(app, knex, oidc, SeasonsService);
 

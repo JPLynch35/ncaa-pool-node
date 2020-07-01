@@ -1,10 +1,10 @@
-module.exports = (app, knex, oidc, storeUser, TeamsService, UsersService) => {
+module.exports = (app, knex, oidc, SeasonsService, TeamsService, UsersService) => {
   app.get('/local-logout', (req, res) => {
     req.logout();
     res.redirect('/login');
   });
 
-  app.get('/', oidc.ensureAuthenticated(), storeUser, (req, res) => {
+  app.get('/', oidc.ensureAuthenticated(), (req, res) => {
     res.redirect('/home');
   });
 
@@ -23,11 +23,12 @@ module.exports = (app, knex, oidc, storeUser, TeamsService, UsersService) => {
   app.get('/selections', oidc.ensureAuthenticated(), (req, res) => {
     const user = req.session.user;
     Promise.all([
+      SeasonsService.findCurrentYear(knex),
       TeamsService.listAll(knex),
       UsersService.listEntries(knex, user)
     ])
-      .then(([allTeams, entries]) => {
-        res.render('application.ejs', {page: 'selections', user: user, teams: allTeams, entries: entries});
+      .then(([season, allTeams, entries]) => {
+        res.render('application.ejs', {page: 'selections', user: user, entries: entries, teams: allTeams, season: season});
       })
       .catch(err => {
         console.warn('Something went wrong:', err);

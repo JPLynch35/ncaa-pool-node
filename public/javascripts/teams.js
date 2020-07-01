@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#dataTable').dataTable({
+  $('.data-table').dataTable({
     "dom": '<"pull-left"f><"pull-right"l>tip',
     'paging': false
   });

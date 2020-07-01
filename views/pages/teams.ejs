@@ -6,23 +6,23 @@
           <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <h4 class="c-grey-900 mB-20">Teams</h4>
             <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Abbreviation</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < teams.length; i++) { %>
                   <tr>
-                    <th>Name</th>
-                    <th>Abbreviatoin</th>
-                    <th>Value</th>
+                    <td><%= teams[i].name %></td>
+                    <td><%= teams[i].abbreviation %></td>
+                    <td><%= teams[i].value %></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <% for(var i = 0; i < teams.length; i++) { %>
-                    <tr>
-                      <td><%= teams[i].name %></td>
-                      <td><%= teams[i].abbreviation %></td>
-                      <td><%= teams[i].value %></td>
-                    </tr>
-                  <% }; %>
-                </tbody>
-              </table>
+                <% }; %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

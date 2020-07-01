@@ -1,59 +1,78 @@
-<div class="row row-bottom-padded-md selections">
-  <div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-    <h2 class="fh5co-heading">Selections</h2>
-    <div class="remaining-selection">
-      <p>Selections Remaining:</p>
-      <p id="selections-remaining-count">
-        <% if (entries.length) { %>
-          <%= entries.length %>
-        <% } else { %>
-          5
-        <% } %>
-      </p>
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="row gap-20 masonry pos-r">
+      <div class="masonry-sizer col-md-6 pos-a"></div>
+
+      <div class="masonry-item col-md-6">
+        <div class="bgc-white p-20 bd">
+          <div class="d-flex justify-content-between">
+            <div>
+              <div class="d-flex">
+                <h4 class="c-grey-900">Remaining Selections:</h4>
+                <h4 id="remaining-selections-count" class="c-grey-900">
+                  <% if (entries.length) { %>
+                    <%= entries.length %>
+                  <% } else { %>
+                    5
+                  <% } %>
+                </h4>
+              </div>
+              <div class="d-flex">
+                <h4 class="c-grey-900">Remaining Budget:</h4>
+                <h4 id="remaining-budget" class="c-grey-900">
+                  $<%= season.spending_cap %>
+                </h4>
+              </div>
+            </div>
+            <div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+          <div class="mT-30">
+            <h6 class="c-grey-900">Selected Teams</h6>
+            <div class="mT-30">
+              <table id="selected" class="table table-striped table-hover table-bordered data-table" cellspacing="0" width="100%" data-ss="1">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Abbreviation</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="masonry-item col-md-6">
+        <div class="bgc-white p-20 bd">
+          <h6 class="c-grey-900">Available Teams</h6>
+          <div class="mT-30">
+            <table id="available" class="table table-striped table-hover table-bordered data-table" cellspacing="0" width="100%" data-ss="1">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Abbreviation</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = 0; i < teams.length; i++) { %>
+                  <tr>
+                    <td><%= teams[i].name %></td>
+                    <td><%= teams[i].abbreviation %></td>
+                    <td><%= teams[i].value %></td>
+                  </tr>
+                <% }; %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-    <h2 class="fh5co-heading">Available Teams</h2>
-      <section class="teams-table available">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col" class="name">Name</th>
-              <th scope="col" class="abbreviation">Abbreviation</th>
-              <th scope="col" class="value">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for(var i = 0; i < teams.length; i++) { %>
-              <tr class="team-row">
-                <td><%= teams[i].name %></td>
-                <td><%= teams[i].abbreviation %></td>
-                <td><%= teams[i].value %></td>
-              </tr>
-            <% }; %>
-          </tbody>
-        </table>
-      </section>
-    </h2>
-  </div>
-
-  <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-    <h2 class="fh5co-heading">Selected Teams</h2>
-      <section class="teams-table selected">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col" class="name">Name</th>
-              <th scope="col" class="abbreviation">Abbreviation</th>
-              <th scope="col" class="value">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-              <tr class="team-row"></tr>
-          </tbody>
-        </table>
-      </section>
-    </h2>
-  </div>
-</div>
+</main>
