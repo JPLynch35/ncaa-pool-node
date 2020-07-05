@@ -10,20 +10,16 @@
               <div class="d-flex">
                 <h4 class="c-grey-900">Remaining Selections:</h4>
                 <h4 id="remaining-selections-count" class="c-grey-900">
-                  <% if (entries.length) { %>
-                    <%= entries.length %>
-                  <% } else { %>
-                    5
-                  <% } %>
+                  <%= 5 - entryTeamIds.length %>
                 </h4>
               </div>
               <div class="d-flex">
                 <h4 class="c-grey-900">Remaining Budget:</h4>
-                <h4 id="remaining-budget" class="c-grey-900">$<%= season.spending_cap %></h4>
+                <h4 id="remaining-budget" class="c-grey-900">$<%= Intl.NumberFormat().format(season.spending_cap) %></h4>
               </div>
             </div>
             <div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" id="entriesSubmit">Submit</button>
             </div>
           </div>
           <div class="mT-30">
@@ -35,9 +31,21 @@
                     <th>Name</th>
                     <th>Abbreviation</th>
                     <th>Value</th>
+                    <th data-class="hidden">Id</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <% for(var i = 0; i < teams.length; i++) { %>
+                    <% if (entryTeamIds.indexOf(teams[i].id) >= 0) { %>
+                      <tr>
+                        <td class="name"><%= teams[i].name %></td>
+                        <td class="abbreviation"><%= teams[i].abbreviation %></td>
+                        <td class="value">$<%= Intl.NumberFormat().format(teams[i].value) %></td>
+                        <td class="id"><%= teams[i].id %></td>
+                      </tr>
+                    <% }; %>
+                  <% }; %>
+                </tbody>
                 <tfoot>
                   <tr>
                     <th colspan="2" style="text-align:right">Total:</th>
@@ -60,15 +68,19 @@
                   <th>Name</th>
                   <th>Abbreviation</th>
                   <th>Value</th>
+                  <th data-class="hidden">Id</th>
                 </tr>
               </thead>
               <tbody>
                 <% for(var i = 0; i < teams.length; i++) { %>
-                  <tr>
-                    <td class="name"><%= teams[i].name %></td>
-                    <td class="abbreviation"><%= teams[i].abbreviation %></td>
-                    <td class="value"><%= teams[i].value %></td>
-                  </tr>
+                  <% if (entryTeamIds.indexOf(teams[i].id) < 0) { %>
+                    <tr>
+                      <td class="name"><%= teams[i].name %></td>
+                      <td class="abbreviation"><%= teams[i].abbreviation %></td>
+                      <td class="value">$<%= Intl.NumberFormat().format(teams[i].value) %></td>
+                      <td class="id"><%= teams[i].id %></td>
+                    </tr>
+                  <% }; %>
                 <% }; %>
               </tbody>
             </table>

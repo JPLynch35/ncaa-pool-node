@@ -10,12 +10,6 @@ const UsersService = {
     };
     return user;
   },
-
-  async listEntries(knex, user) {
-    const teamIds = await listUserTeamIds(knex, user);
-    const userTeams = await listUserTeams (knex, teamIds);
-    return userTeams;
-  },
 };
 
 function findByEmail(knex, downcasedEmail) {
@@ -39,31 +33,5 @@ function insertUser(knex, downcasedEmail, firstName, lastName) {
       console.warn('Something went wrong:', err);
     });
 };
-
-function listUserTeamIds(knex, user) {
-  return knex('user_teams')
-    .select('team_id')
-    .where('user_id', user.id)
-    .then(teamIds => {
-      return teamIds
-    })
-    .catch(err => {
-      console.warn('Something went wrong:', err);
-    });
-};
-
-function listUserTeams(knex, teamIds) {
-  return knex('teams')
-    .select('*')
-    .whereIn('id', teamIds)
-    .then(teams => {
-      return teams
-    })
-    .catch(err => {
-      console.warn('Something went wrong:', err);
-    });
-
-};
-
 
 module.exports = UsersService;

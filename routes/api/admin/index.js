@@ -1,3 +1,4 @@
+// TODO remove api and place inside regular admin router
 module.exports = (app, knex, oidc, SeasonsService) => {
   app.get('/api/admin/current_season', oidc.ensureAuthenticated(), (req, res) => {
     const user = req.session.user;

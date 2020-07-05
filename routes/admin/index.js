@@ -16,10 +16,10 @@ module.exports = (app, knex, oidc, SeasonsService) => {
   });
 
   app.post('/admin/season_settings', oidc.ensureAuthenticated(), (req, res) => {
-    currentYear = req.body.year;
-    spendingCap = req.body.spendingCap;
-    startDate = req.body.startDate;
-    endDate = req.body.endDate;
+    const currentYear = req.body.year;
+    const spendingCap = req.body.spendingCap;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
     SeasonsService.updateSeason(knex, currentYear, spendingCap, startDate, endDate)
       .then(() => {
         res.redirect('back');

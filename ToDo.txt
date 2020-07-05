@@ -1,0 +1,4 @@
+-store user selections and season start date in session (when to repull from db?)
+-only show selections in sidebar and allow in paths up till season start date
+-id columns on selectoin page showing on first load
+-make code more OOP

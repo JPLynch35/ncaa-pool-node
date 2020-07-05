@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  $('.data-table').dataTable({
-    "dom": '<"pull-left"f><"pull-right"l>tip',
-    'paging': false
-  });
+  // $('.data-table').dataTable({
+  //   "dom": '<"pull-left"f><"pull-right"l>tip',
+  //   'paging': false
+  // });
 });

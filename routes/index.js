@@ -1,7 +1,7 @@
-module.exports = (app, knex, oidc, SeasonsService, TeamsService, UsersService) => {
+module.exports = (app, knex, oidc, EntriesService, SeasonsService, TeamsService, UsersService) => {
   app.get('/local-logout', (req, res) => {
     req.logout();
-    res.redirect('/login');
+    res.redirect('/');
   });
 
   app.get('/', oidc.ensureAuthenticated(), (req, res) => {
@@ -25,10 +25,23 @@ module.exports = (app, knex, oidc, SeasonsService, TeamsService, UsersService) =
     Promise.all([
       SeasonsService.findCurrentYear(knex),
       TeamsService.listAll(knex),
-      UsersService.listEntries(knex, user)
+      EntriesService.listEntryTeamIds(knex, user)
     ])
-      .then(([season, allTeams, entries]) => {
-        res.render('application.ejs', {page: 'selections', user: user, entries: entries, teams: allTeams, season: season});
+      .then(([season, allTeams, entryTeamIds]) => {
+        res.render('application.ejs', {page: 'selections', user: user, entryTeamIds: entryTeamIds, teams: allTeams, season: season});
+      })
+      .catch(err => {
+        console.warn('Something went wrong:', err);
+        res.status(500).send(err);
+      });
+  });
+
+  app.post('/selections', oidc.ensureAuthenticated(), (req, res) => {
+    const user = req.session.user;
+    const entryTeamIds = req.body.entryTeamIds;
+    EntriesService.updateEntries(knex, user, entryTeamIds)
+      .then(() => {
+        res.status(200).send();
       })
       .catch(err => {
         console.warn('Something went wrong:', err);

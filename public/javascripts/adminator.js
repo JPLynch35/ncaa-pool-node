@@ -6,7 +6,7 @@ import './vendor/scrollbar/perfect-scrollbar-1.1.0.min.js';
 import './vendor/adminator/sidebar.js';
 // import './vendor/skycons/skycons-1.0.0.js';
 // import './vendor/chat/index.js';
-import './vendor/datatables/datatables-1.10.21.min.js';
+import './vendor/datatables/datatables-1.10.21.js';
 // import './vendor/datepicker/index.js';
 // import './vendor/email/index.js';
 // import './vendor/fullcalendar/index.js';

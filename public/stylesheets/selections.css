@@ -12,11 +12,15 @@
 
 .table tbody tr.odd.disabled:hover td, .table tbody tr.odd.disabled:hover th {
   background-color: rgb(242, 242, 242);
-  color: #212529;
+  color: lightgray;
   cursor: default;
 }
 .table tbody tr.even.disabled:hover td, .table tbody tr.even.disabled:hover th {
   background-color: rgb(255, 255, 255);
-  color: #212529;
+  color: lightgray;
   cursor: default;
+}
+
+.table tbody tr.disabled {
+  color: lightgray;
 }

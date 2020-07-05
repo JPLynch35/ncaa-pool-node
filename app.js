@@ -8,6 +8,7 @@ const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const knex = require('knex')(configuration);
+const EntriesService = require('./modules/entriesService.js');
 const SeasonsService = require('./modules/seasonsService.js');
 const TeamsService = require('./modules/teamsService.js');
 const UsersService = require('./modules/usersService.js');
@@ -32,9 +33,13 @@ app.use(session({
 app.use(oidc.router);
 app.use(express.static('public/'));
 
+newLocalUserSessionRequired = (req) => {
+  return (!req.session.user || (req.userContext.userinfo.preferred_username != req.session.user.email));
+};
+
 // automatically apply the `storeUser` middleware to all routes
 storeUser = function (req, res, next) {
-  if (req && req.userContext && req.userContext.userinfo && !req.session.user) {
+  if (req.userContext && req.userContext.userinfo && newLocalUserSessionRequired(req)) {
     const userInfo = req.userContext.userinfo;
     UsersService.findOrCreateUser(knex, userInfo)
       .then(user => {
@@ -67,7 +72,7 @@ app.all("/admin/*", storeUser, requireAdmin, function(req, res, next) {
   next();
 });
 
-require('./routes/index')(app, knex, oidc, SeasonsService, TeamsService, UsersService);
+require('./routes/index')(app, knex, oidc, EntriesService, SeasonsService, TeamsService, UsersService);
 require('./routes/admin/index')(app, knex, oidc, SeasonsService);
 require('./routes/api/admin/index')(app, knex, oidc, SeasonsService);
 
